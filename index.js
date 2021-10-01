@@ -5,6 +5,8 @@ const parseHeader = require("./parseHeader");
 const checkMirType = require("./mirType");
 const checkItinType = require("./getDomInt");
 const getPax = require('./getPaxSection')
+// const airSegments = require('./getAirSegments');
+const getAirSegments = require("./getAirSegments");
 
 const file = path.join(__dirname, "MIR-files/files/AAAHTGAL.MIR");
 
@@ -15,6 +17,7 @@ let rawText = fs.readFileSync(file, "utf8", (err, text) => {
     return text;
   }
 });
+let obj = {}
 let header = getHeader(rawText);
 let parsed = parseHeader(header);
 
@@ -24,11 +27,14 @@ let mirType = checkMirType(parsed.T50IN12)
 let itinType = checkItinType(parsed.T50IN12)
 let numPaxes = parsed.T50PGN
 let paxes = getPax(rawText, numPaxes)
+let segs = getAirSegments(rawText)
 
-Object.assign(parsed, mirType, itinType, paxes)
+Object.assign(obj,parsed, mirType, itinType, paxes, segs)
 
-// console.log(parsed);
-console.log(parsed.passengers);
+
+
+console.log(obj);
+// console.log(parsed.passengers);
 
 // console.log(mirType);
 // console.log(getPax(rawText, numPaxes));

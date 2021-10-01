@@ -38,7 +38,7 @@ function parseHeader(header) {
   for(let i of arr){
       Object.assign(obj, i)
   }
-  return obj
+  return {header:obj}
 }
 
 module.exports = parseHeader;

@@ -25,10 +25,10 @@ function getPaxSection(text, args) {
     for (let i of arr) {
       Object.assign(obj, i);
     }
-    return { passenger: obj };
+    return obj;
   });
 
-  return { passengers: paxArr };
+  return {passengers:paxArr};
 }
 
 module.exports = getPaxSection;
