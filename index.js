@@ -4,9 +4,10 @@ const getHeader = require("./getHeader");
 const parseHeader = require("./parseHeader");
 const checkMirType = require("./mirType");
 const checkItinType = require("./getDomInt");
-const getPax = require('./getPaxSection')
+const getPax = require('./getPaxSection');
+const getFareValue = require("./getFareValue");
 
-const file = path.join(__dirname, "MIR-files/files/AAAHTGAL.MIR");
+const file = path.join(__dirname, "files/AAAHTGAL.MIR");
 
 let rawText = fs.readFileSync(file, "utf8", (err, text) => {
   if (err) {
@@ -20,15 +21,16 @@ let parsed = parseHeader(header);
 
 
 let mirType = checkMirType(parsed.T50IN12)
-// console.log(mirType);
+
 let itinType = checkItinType(parsed.T50IN12)
 let numPaxes = parsed.T50PGN
 let paxes = getPax(rawText, numPaxes)
+let fares = getFareValue(rawText, parseInt(parsed.T50FBN))
 
-Object.assign(parsed, mirType, itinType, paxes)
+let ob = {}
+Object.assign(ob, parsed, mirType, itinType, paxes, fares)
 
-// console.log(parsed);
-console.log(parsed.passengers);
 
-// console.log(mirType);
-// console.log(getPax(rawText, numPaxes));
+
+console.log(ob.passengers[0]);
+
