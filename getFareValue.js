@@ -25,11 +25,11 @@ function getFareValue(text, ...args) {
         let fareData = getFareData(fields, ch)
         let itTaxes = getItTaxBreakdown(ch)
         let mainTaxes = getMainTaxes(ch)
-        // let obj = {}
-        // Object.assign(obj, fareData, itTaxes, mainTaxes)
         return {fare:{fareData, itTaxes, mainTaxes}}
+       
     })
     // console.log(resulted);
+     correctAmountsFromString(resulted)
     return {fares:resulted}
 
 }
@@ -78,6 +78,12 @@ function getMainTaxes(input) {
     return obj 
 
 
+}
+function correctAmountsFromString(input){
+    let obj = input
+    for(let i of obj){
+        
+    }
 }
 
 module.exports = getFareValue
