@@ -1,5 +1,7 @@
-function getPaxSection(text, args) {
+function getPaxSection(text, ...args) {
+  let [num, code] = args
   //   let paxesCount = parseInt(args);
+  // console.log(args);
   let fields = {
     A02NME: { s: 3, l: 33 }, // PASSENGER NAME
     A02TKT: { s: 48, l: 10 }, // TICKET/INVOICE NUMBERS
@@ -9,22 +11,18 @@ function getPaxSection(text, args) {
 
   let paxArrRaw = text.split("\r").filter((line) => {
     if (line.indexOf("A02") !== -1) {
-      //   console.log(line);
       return line;
     }
-    // return "\r"+line.indexOf("A02") !== -1;
   });
-  //   console.log(paxArrRaw);
   let paxArr = paxArrRaw.map((pax) => {
-    //   console.log(pax);
     let arr = Object.entries(fields).map(([key, value]) => {
-      return { [key]: pax.substr(value.s + 1, value.l) };
+      return { [key]: pax.substr(value.s + 1, value.l).replace(/\s/g,"") };
     });
-    // console.log(arr);
     let obj = {};
     for (let i of arr) {
       Object.assign(obj, i);
     }
+    obj.A02TKT =`${code}-${obj.A02TKT}`
     return { passenger: obj };
   });
 

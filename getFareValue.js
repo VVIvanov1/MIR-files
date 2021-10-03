@@ -23,9 +23,9 @@ function getFareValue(text, ...args) {
 
     let resulted = chunks.map(ch => {
         let fareData = getFareData(fields, ch)
-        let itTaxes = getItTaxBreakdown(ch)
-        let mainTaxes = getMainTaxes(ch)
-        return { fare: { fareData, itTaxes, mainTaxes } }
+        fareData.itTaxes = getItTaxBreakdown(ch)
+        fareData.mainTaxes = getMainTaxes(ch)
+        return { fare: { fareData } }
 
     })
 

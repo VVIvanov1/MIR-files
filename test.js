@@ -1,13 +1,13 @@
-const regex = /(^A07[\s\S]*?^)A08/gm
-const chunks = 2
-const str = `A0701PLN      216.00KZT       70669KZT       21420KZTT1:      59NDT2:    5950XWT3:   43240XT
-IT:    9358CZ   33882YQ
-A0702PLN       21.00KZT       70669KZT       21420KZTT1:      59NDT2:    5950XWT3:   43240XT
-IT:    9358CZ   33882YQ`;
+const parser = require('./index')
+const path = require('path')
+const fs = require('fs')
+const file = path.join(__dirname, "files/AAAHTGAL.MIR");
+let rawText = fs.readFileSync(file, "utf8", (err, text) => {
+    if (err) {
+      console.error(err);
+    } else {
+      return text;
+    }
+  });
 
-let length = str.length
-console.log(str, "\n", length);
-
-// let res = regex.exec(str)
-// console.log(res[1]);
-
+console.log(parser(rawText));

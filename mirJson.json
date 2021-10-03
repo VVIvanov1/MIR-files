@@ -17,15 +17,15 @@
     "T50ARN": "002",
     "T50FBN": "001",
     "T50EXC": "000",
-    "MIR type": "REGULAR MIR",
+    "MIR type": "TKT",
     "itinerary type": "Domestic",
     "passengers": [
         {
             "passenger": {
-                "A02NME": "AIMURADOVA/ORAZGILMRS            ",
-                "A02TKT": "9903113762",
+                "A02NME": "AIMURADOVA/ORAZGILMRS",
+                "A02TKT": "064-9903113762",
                 "A02FIN": "01",
-                "A02EIN": "  "
+                "A02EIN": ""
             }
         }
     ],
@@ -39,27 +39,27 @@
                     "A07CRT": "KZT",
                     "A07TTA": 70669,
                     "A07CRE": "KZT",
-                    "A07EQV": 21420
-                },
-                "itTaxes": [
-                    {
-                        "CZ": 9358
-                    },
-                    {
-                        "YQ": 33882
-                    }
-                ],
-                "mainTaxes": [
-                    {
-                        "ND": 59
-                    },
-                    {
-                        "XW": 5950
-                    },
-                    {
-                        "XT": 43240
-                    }
-                ]
+                    "A07EQV": 21420,
+                    "itTaxes": [
+                        {
+                            "CZ": 9358
+                        },
+                        {
+                            "YQ": 33882
+                        }
+                    ],
+                    "mainTaxes": [
+                        {
+                            "ND": 59
+                        },
+                        {
+                            "XW": 5950
+                        },
+                        {
+                            "XT": 43240
+                        }
+                    ]
+                }
             }
         }
     ],
@@ -158,5 +158,6 @@
                 "A04BAG": "0PC"
             }
         ]
-    ]
+    ],
+    "record": "(WAW)Warsaw-(PRG)Prague-(PRG)Prague-(WAW)Warsaw"
 }
