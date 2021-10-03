@@ -1,9 +1,5 @@
 function checkMirType(obj) {
-  // let type = obj.filter((item) => {
-  //   return Object.keys(item)[0] === "T50IN12";
-  // });
-  // console.log(obj);
-  // console.log(obj);
+
   switch (obj) {
     case "H":
       return {"MIR type":"TKT"};

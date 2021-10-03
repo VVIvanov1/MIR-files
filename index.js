@@ -8,6 +8,7 @@ const getPax = require('./getPaxSection');
 const getFareValue = require("./getFareValue");
 const getAirData = require("./getAirDataSecion");
 const getFinalFares = require("./getFinalFare");
+const getExchangeData = require("./getExchangeData")
 
 const file = path.join(__dirname, "files/AAAHTGAL.MIR");
 
@@ -15,19 +16,27 @@ function getParsedData(file) {
 
   let header = getHeader(file);
   let parsed = parseHeader(header);
-
+  
 
   let mirType = checkMirType(parsed.T50IN12)
-  let itinType = checkItinType(parsed.T50IN12)
-  let numPaxes = parsed.T50PGN
-  let paxes = getPax(file, numPaxes, parsed.T50ISA)
-  let fares = getFareValue(file, parseInt(parsed.T50FBN))
-  let flightsData = getAirData(file)
-  let paxDataFareTicket = getFinalFares(fares, paxes, flightsData, parsed)
-  for (let i of paxDataFareTicket) {
-    Object.assign(i, mirType, itinType)
+  
+  if (mirType["MIR type"] === "TKT" && parsed.T50EXC === '000') {
+    let itinType = checkItinType(parsed.T50IN12)
+    let numPaxes = parsed.T50PGN
+    let paxes = getPax(file, numPaxes, parsed.T50ISA)
+    let fares = getFareValue(file, parseInt(parsed.T50FBN))
+    let flightsData = getAirData(file)
+    let paxDataFareTicket = getFinalFares(fares, paxes, flightsData, parsed)
+    for (let i of paxDataFareTicket) {
+      Object.assign(i, mirType, itinType)
+    }
+    return paxDataFareTicket
+  } else {
+    parsed['MIR type'] = 'TKT-EXCHANGE'
+    // console.log(parsed);
+    getExchangeData(file)
   }
-  return paxDataFareTicket
+
 }
 
 module.exports = getParsedData
