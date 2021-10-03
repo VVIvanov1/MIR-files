@@ -7,6 +7,7 @@ const checkItinType = require("./getDomInt");
 const getPax = require('./getPaxSection');
 const getFareValue = require("./getFareValue");
 const getAirData = require("./getAirDataSecion");
+const getTicketInfo = require("./helpers/getTicketInfo");
 
 const file = path.join(__dirname, "files/AAAHTGAL.MIR");
 
@@ -27,12 +28,18 @@ let numPaxes = parsed.T50PGN
 let paxes = getPax(rawText, numPaxes)
 let fares = getFareValue(rawText, parseInt(parsed.T50FBN))
 let flightsData = getAirData(rawText)
-// console.log(getAirData(rawText));
+console.log(flightsData);
 
 let ob = {}
 Object.assign(ob, parsed, mirType, itinType, paxes, fares, flightsData)
 
-console.log(ob.flights);
+// getTicketInfo(ob)
+// console.log(ob.flights);
 
-// console.log(ob.fares[0].fare.fareData);
 
+// let normalObj = JSON.stringify(ob)
+// fs.writeFile('./mirJson.json', normalObj, 'utf8', (err, res) => {
+//   if (err) {
+//     console.log(err);
+//   }
+// })

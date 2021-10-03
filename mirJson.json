@@ -1,0 +1,162 @@
+{
+    "T50TRC": "1G",
+    "T50DTE": "25DEC18",
+    "T50TME": "0827 ",
+    "T50ISC": "OK",
+    "T50ISA": "064",
+    "T50ISN": "CSA CZECH AIRLINES      ",
+    "T50BPC": "3Y6S",
+    "T50TPC": "3Y6S",
+    "T50RCL": "56DV7A",
+    "T50AGS": " N3889",
+    "T50AGT": "89AG",
+    "T50IN7": "N",
+    "T50IN12": "H",
+    "T50IN17": "X",
+    "T50PGN": "001",
+    "T50ARN": "002",
+    "T50FBN": "001",
+    "T50EXC": "000",
+    "MIR type": "REGULAR MIR",
+    "itinerary type": "Domestic",
+    "passengers": [
+        {
+            "passenger": {
+                "A02NME": "AIMURADOVA/ORAZGILMRS            ",
+                "A02TKT": "9903113762",
+                "A02FIN": "01",
+                "A02EIN": "  "
+            }
+        }
+    ],
+    "fares": [
+        {
+            "fare": {
+                "fareData": {
+                    "A07FSI": "01",
+                    "A07CRB": "PLN",
+                    "A07TBF": 216,
+                    "A07CRT": "KZT",
+                    "A07TTA": 70669,
+                    "A07CRE": "KZT",
+                    "A07EQV": 21420
+                },
+                "itTaxes": [
+                    {
+                        "CZ": 9358
+                    },
+                    {
+                        "YQ": 33882
+                    }
+                ],
+                "mainTaxes": [
+                    {
+                        "ND": 59
+                    },
+                    {
+                        "XW": 5950
+                    },
+                    {
+                        "XT": 43240
+                    }
+                ]
+            }
+        }
+    ],
+    "flights": [
+        [
+            {
+                "A04ITN": "01"
+            },
+            {
+                "A04CDE": "OK"
+            },
+            {
+                "A04NUM": "064"
+            },
+            {
+                "A04NME": "CSA CZECH AI"
+            },
+            {
+                "A04FLT": " 777"
+            },
+            {
+                "A04CLS": "N "
+            },
+            {
+                "A04STS": "HK"
+            },
+            {
+                "A04DTE": "20MAR"
+            },
+            {
+                "A04TME": "0905 "
+            },
+            {
+                "A04ARV": "1040 "
+            },
+            {
+                "A04OCC": "WAW"
+            },
+            {
+                "A04OCN": "WARSAW       "
+            },
+            {
+                "A04DCC": "PRG"
+            },
+            {
+                "A04DCN": "PRAGUE       "
+            },
+            {
+                "A04BAG": "0PC"
+            }
+        ],
+        [
+            {
+                "A04ITN": "02"
+            },
+            {
+                "A04CDE": "OK"
+            },
+            {
+                "A04NUM": "064"
+            },
+            {
+                "A04NME": "CSA CZECH AI"
+            },
+            {
+                "A04FLT": " 776"
+            },
+            {
+                "A04CLS": "N "
+            },
+            {
+                "A04STS": "HK"
+            },
+            {
+                "A04DTE": "30MAR"
+            },
+            {
+                "A04TME": "1005 "
+            },
+            {
+                "A04ARV": "1135 "
+            },
+            {
+                "A04OCC": "PRG"
+            },
+            {
+                "A04OCN": "PRAGUE       "
+            },
+            {
+                "A04DCC": "WAW"
+            },
+            {
+                "A04DCN": "WARSAW       "
+            },
+            {
+                "A04BAG": "0PC"
+            }
+        ]
+    ]
+}

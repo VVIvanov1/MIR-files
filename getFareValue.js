@@ -25,23 +25,30 @@ function getFareValue(text, ...args) {
         let fareData = getFareData(fields, ch)
         let itTaxes = getItTaxBreakdown(ch)
         let mainTaxes = getMainTaxes(ch)
-        return {fare:{fareData, itTaxes, mainTaxes}}
-       
+        return { fare: { fareData, itTaxes, mainTaxes } }
+
     })
-    // console.log(resulted);
-     correctAmountsFromString(resulted)
-    return {fares:resulted}
+
+    return { fares: resulted }
 
 }
 function getFareData(input, text) {
+    let corrector = ['A07TBF', 'A07TTA', 'A07EQV']
     let result = Object.entries(input).map(([key, value]) => {
-        return { [key]: text.substr(value.s, value.l) }
+        if (corrector.indexOf(key) !== -1) {
+            return { [key]: parseInt(text.substr(value.s, value.l)) }
+        } else {
+            return { [key]: text.substr(value.s, value.l) }
+        }
+ 
     })
     let obj = {}
     for (let i of result) {
         Object.assign(obj, i)
     }
-    return obj 
+   
+
+    return obj
 }
 
 function getItTaxBreakdown(input) {
@@ -75,15 +82,9 @@ function getMainTaxes(input) {
             startIndex += 13
         }
     }
-    return obj 
+    return obj
 
 
-}
-function correctAmountsFromString(input){
-    let obj = input
-    for(let i of obj){
-        
-    }
 }
 
 module.exports = getFareValue
