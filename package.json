@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/VVIvanov1/MIR-files/issues"
   },
-  "homepage": "https://github.com/VVIvanov1/MIR-files#readme"
+  "homepage": "https://github.com/VVIvanov1/MIR-files#readme",
+  "dependencies": {
+    "googleapis": "^88.2.0"
+  }
 }
