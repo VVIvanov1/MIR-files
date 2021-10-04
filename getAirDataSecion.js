@@ -19,13 +19,13 @@ function getAirData(text) {
         A04BAG: { s: 86, l: 3 } // baggage allowence 
     }
 
-    let arr = text.split("\n")
+    let arr = text.split("\r\n")
     let flights = arr.filter(item => {
         if (item.startsWith("A04")) {
             return item
         }
     })
-
+    // console.log(arr);
     let flightsArrReady = []
 
 

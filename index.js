@@ -9,31 +9,58 @@ const getFareValue = require("./getFareValue");
 const getAirData = require("./getAirDataSecion");
 const getFinalFares = require("./getFinalFare");
 const getExchangeData = require("./getExchangeData")
+const dateTimeFormats = require('./helpers/dateTimeConverter')
 
-const file = path.join(__dirname, "files/AAAHTGAL.MIR");
+let [convertDate, convertTime] = dateTimeFormats
 
 function getParsedData(file) {
 
   let header = getHeader(file);
   let parsed = parseHeader(header);
-  
+
 
   let mirType = checkMirType(parsed.T50IN12)
-  
-  if (mirType["MIR type"] === "TKT" && parsed.T50EXC === '000') {
+  if (mirType["MIR type"] === "TKT" && parsed.T50EXC === '000' || mirType["MIR type"] === "RFND") {
     let itinType = checkItinType(parsed.T50IN12)
     let numPaxes = parsed.T50PGN
     let paxes = getPax(file, numPaxes, parsed.T50ISA)
     let fares = getFareValue(file, parseInt(parsed.T50FBN))
     let flightsData = getAirData(file)
+    
     let paxDataFareTicket = getFinalFares(fares, paxes, flightsData, parsed)
     for (let i of paxDataFareTicket) {
       Object.assign(i, mirType, itinType)
     }
-    return paxDataFareTicket
+   
+    let dataOrder = {
+      issueDate: null,
+      issueTime: null,
+      gds: null,
+      pnr: null,
+      'MIR type': null,
+      paxTicket: null,
+      paxName: null,
+      flights: null,
+      airline: null,
+      paxFare: null,
+      taxes: null,
+      paxTotal: null,
+      paxTaxes: null,
+      bookedAgent: null,
+      ticketedAgent: null,
+      bookedPCC: null,
+      issuesPCC: null,
+      'itinerary type': null
+    }
+    for(let i of paxDataFareTicket){
+      Object.assign(dataOrder, i)
+    }
+    dataOrder.issueDate = convertDate(dataOrder.issueDate)
+    dataOrder.issueTime = convertTime(dataOrder.issueTime)
+  
+    return dataOrder
   } else {
     parsed['MIR type'] = 'TKT-EXCHANGE'
-    // console.log(parsed);
     getExchangeData(file)
   }
 
@@ -46,27 +73,5 @@ module.exports = getParsedData
 //     console.log(err);
 //   }
 // })
-// / let rawText = fs.readFileSync(file, "utf8", (err, text) => {
-  //   if (err) {
-  //     console.error(err);
-  //   } else {
-  //     return text;
-  //   }
-  // });
-  // let header = getHeader(rawText);
-  // let parsed = parseHeader(header);
 
-
-  // let mirType = checkMirType(parsed.T50IN12)
-  // let itinType = checkItinType(parsed.T50IN12)
-  // let numPaxes = parsed.T50PGN
-  // let paxes = getPax(rawText, numPaxes, parsed.T50ISA)
-  // let fares = getFareValue(rawText, parseInt(parsed.T50FBN))
-  // let flightsData = getAirData(rawText)
-  // let paxDataFareTicket = getFinalFares(fares, paxes, flightsData, parsed)
-  // for (let i of paxDataFareTicket) {
-  //   Object.assign(i, mirType, itinType)
-  // }
-
-  // console.log(paxDataFareTicket);
 
