@@ -7,7 +7,7 @@ const parseHdr = require("../parseHeader");
 const getPaxData = require("../getPaxSection");
 
 const folder = path.join(__dirname, "../files");
-console.log(folder);
+// console.log(folder);
 
 function getFiles() {
   let fileNames = [];
@@ -36,37 +36,52 @@ filesToCheck.forEach((file) => {
   return mir;
 });
 let fields = {
-    A23TKT:{s:03,l:14}, // ticket number
-    A23NME: {s:48,l:33}, // refund passenger name
-    A23CDI: {s:88,l:1}, // CRS DERIVED INDICATOR - Contains indicator for source of refund information.
-    // C = all data retrieved from CRS when an electronic ticket
-    // B = non-ticketing transaction types e.g. EMD
-    // U = user input only, no data retrieved from CRS.
-}
+  A23TKT: { s: 03, l: 14 }, // ticket number
+  A23NME: { s: 48, l: 22 }, // refund passenger name
+  A23CDI: { s: 82, l: 1 }, // CRS DERIVED INDICATOR - Contains indicator for source of refund information.
+  // C = all data retrieved from CRS when an electronic ticket
+  // B = non-ticketing transaction types e.g. EMD
+  // U = user input only, no data retrieved from CRS.
+};
 
 rfndFiles.forEach((file) => {
   let rawtext = fs.readFileSync(file, "utf8");
   let header = hdr(rawtext);
   let parsehdr = parseHdr(header);
   let paxdata = getPaxData(rawtext, parsehdr.T50ISA);
-  getRefundSection(rawtext)
+  getRefundSection(rawtext);
   paxes.push(paxdata);
 });
-// paxes.forEach((pax) => {
-//   console.log(pax.passengers);
-// });
 
 function getRefundSection(text) {
-    let rgx = /A23.{1,115}/gm
-    let section = rgx.exec(text)[0]
-    console.log(section.length);
-    let parsed = Object.entries(fields).map(([key, val])=>{
-        // console.log(val);
-        let str = section.substring(48,33)
-        // console.log(str);
-        return str
-        // console.log(str);
-    })
-    // console.log(parsed);
+  let rgx = /A23.{1,115}/gm;
+  let section = rgx.exec(text)[0];
+  let parsed = Object.entries(fields).map(([key, val]) => {
+    let str = section.substr(val.s, val.l);
+    return str;
+  });
+}
+let refundProcess = rfndFiles[0];
+
+function getRefundInfo(file) {
+  let rawText = fs.readFileSync(file, "utf8");
+  let regex = /(A23[\s\S]*RA:.*)/gm;
+  let regTicket = /(?<=A23)\d+/g;
+  let regAmount = /(?<=RA:.*)(?<=KZT).*/g;
+  let regexResult = regex.exec(rawText);
+
+  let refInfoArray = [];
+
+  regexResult.map((item) => {
+    // let ticket = regTicket.exec(item);
+    // let amount = "-" + regAmount.exec(item);
+    let ticket = item.match(regTicket)[0]
+    let amount = '-'+item.match(regAmount)[0].replace(/\s/g,"")
+    refInfoArray.push({ paxTicket: ticket, paxTotal: Number(amount) });
+    // console.log(ticket);
+  });
+  console.log(refInfoArray);
 
 }
+
+getRefundInfo(refundProcess);
