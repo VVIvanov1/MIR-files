@@ -15,6 +15,7 @@ function correctOrder(arr){
         taxes: null,
         paxTotal: null,
         paxTaxes: null,
+        exchangeFor: null,
         bookedAgent: null,
         ticketedAgent: null,
         bookedPCC: null,
