@@ -73,12 +73,11 @@ function getRefundInfo(file) {
   let refInfoArray = [];
 
   regexResult.map((item) => {
-    // let ticket = regTicket.exec(item);
-    // let amount = "-" + regAmount.exec(item);
+
     let ticket = item.match(regTicket)[0]
     let amount = '-'+item.match(regAmount)[0].replace(/\s/g,"")
     refInfoArray.push({ paxTicket: ticket, paxTotal: Number(amount) });
-    // console.log(ticket);
+    
   });
   console.log(refInfoArray);
 
