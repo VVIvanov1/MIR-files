@@ -4,15 +4,15 @@ function getFinalFares(fare, ...args) {
   let paxesData = [];
   paxes.passengers.map((pax) => {
     let filterId = pax.passenger.A02FIN;
-    let exchangeRecord
+    let exchangeRecord;
     if (exchange !== null) {
       exchangeRecord = exchange.filter(item => {
-        if (item[0]['A10EXI'] === filterId) {
-          return item
+        if (item[0]["A10EXI"] === filterId) {
+          return { record: item.record, adc: item.tktTotal };
         }
-      })[0].record
-    }else{
-      exchangeRecord = exchange
+      })[0];
+    } else {
+      exchangeRecord = { record: exchange, adc: exchange };
     }
 
     let filtered = faresArr.filter((f) => {
@@ -45,7 +45,10 @@ function getFinalFares(fare, ...args) {
         paxTicket: pax.passenger.A02TKT,
         paxFare: filtered[0].fare.fareData.A07EQV,
         paxTaxes: mainTxsString,
-        paxTotal: filtered[0].fare.fareData.A07TTA,
+        paxTotal:
+          exchangeRecord.adc !== null
+            ? exchangeRecord.tktTotal
+            : filtered[0].fare.fareData.A07TTA,
         taxes:
           filtered[0].fare.fareData.A07TTA - filtered[0].fare.fareData.A07EQV,
         flights: flights.record,
@@ -58,9 +61,8 @@ function getFinalFares(fare, ...args) {
         gds: parsed.T50TRC,
         pnr: parsed.T50RCL,
         airline: parsed.T50ISC,
-        exchangeFor: exchangeRecord
+        exchangeFor: exchangeRecord.record,
       });
-
     }
   });
   return paxesData;

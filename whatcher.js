@@ -1,6 +1,7 @@
 const fs = require("fs");
 const hound = require("hound");
-const folder = "C:\\Users\\Biletalu\\Desktop\\Новая папка\\Новая папка";
+// const folder = "C:\\Users\\Biletalu\\Desktop\\Новая папка\\Новая папка";
+const folder = 'C:\\Users\\user\\Desktop\\Новая папка\\Новая папка'
 const getHeader = require("./utils/getHeader");
 const parseHeader = require("./utils/parseHeader");
 const mirType = require("./utils/mirType");
@@ -32,7 +33,7 @@ whatcher.on("create", (file) => {
     let airData = getAirDataSection(rawText);
     let exchange = null;
     if(type['MIR type'] === "EXCH"){
-      exchange = getExchangeData(rawText)
+      exchange = getExchangeData(rawText, fares)
       // console.log(exchange);
       // let tempResult = getFinalFare(fares, paxes, airData, parsed, exchange);
     }
