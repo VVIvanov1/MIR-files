@@ -1,0 +1,59 @@
+[
+  {
+    "fileName": "AAAHTGAL.MIR",
+    "type": "TKT",
+    "tkt": "064-9903113762",
+    "exch": false
+  },
+  {
+    "fileName": "AAAHVGAL  EMD BAG issue.MIR",
+    "type": "EMD",
+    "tkt": "064-0",
+    "exch": false
+  },
+  {
+    "fileName": "AAAHWGAL.MIR",
+    "type": "EMD-VOID",
+    "tkt": "064-9911368670",
+    "exch": false
+  },
+  {
+    "fileName": "AAAHXGAL.MIR",
+    "type": "TKT",
+    "tkt": "064-9031137630",
+    "exch": { "exchange": true, "oldTicket": "064-9903113762" }
+  },
+  { "fileName": "AAAHYGAL.MIR", "type": "EMD", "tkt": "064-0", "exch": false },
+  {
+    "fileName": "AAAIAGAL.MIR",
+    "type": "VOID",
+    "tkt": "064-9031137630",
+    "exch": false
+  },
+  {
+    "fileName": "AAAIBGAL.MIR",
+    "type": "VOID",
+    "tkt": "064-9031137620",
+    "exch": false
+  },
+  {
+    "fileName": "AAAJTGAL.MIR",
+    "type": "RFND",
+    "tkt": "   -9031137860",
+    "exch": false
+  },
+  { "fileName": "AAAJVGAL.MIR", "type": "EMD", "tkt": "064-0", "exch": false },
+  { "fileName": "AAAJVGALL.MIR", "type": "EMD", "tkt": "064-0", "exch": false },
+  {
+    "fileName": "AAAJWGAL.MIR",
+    "type": "EMD-VOID",
+    "tkt": "064-9911369960",
+    "exch": false
+  },
+  {
+    "fileName": "AAAJXGAL.MIR",
+    "type": "RFND",
+    "tkt": "064-9033228040",
+    "exch": false
+  }
+]

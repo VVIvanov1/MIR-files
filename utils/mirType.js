@@ -1,6 +1,12 @@
 function checkMirType(obj) {
+  let type = ''
+  Object.entries(obj).map(([key, val])=>{
+    if(key === 'T50IN12'){
+      type = val
+    }
+  })
 
-  switch (obj) {
+  switch (type) {
     case "H":
       return {"MIR type":"TKT"};
       break;

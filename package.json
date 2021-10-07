@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/VVIvanov1/MIR-files#readme",
   "dependencies": {
-    "googleapis": "^88.2.0"
+    "googleapis": "^88.2.0",
+    "hound": "^1.0.5"
   }
 }
