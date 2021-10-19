@@ -3,7 +3,7 @@ const path = require("path");
 const hdr = require("../getHeader");
 const type = require("../mirType");
 // const parseHeader = require("../parseHeader");
-const parseHdr = require("../parseHeader");
+const parseHdr = require("../arj/parseHeader");
 const getPaxData = require("../getPaxSection");
 
 const folder = path.join(__dirname, "../files");

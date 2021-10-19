@@ -4,6 +4,15 @@
     // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+    {
+        "name": "Launch Program",
+        "program": "${workspaceFolder}/whatcher.js",
+        "request": "launch",
+        "skipFiles": [
+            "<node_internals>/**"
+        ],
+        "type": "pwa-node"
+    },
         {
             "name": "Attach by Process ID",
             "processId": "${command:PickProcess}",
