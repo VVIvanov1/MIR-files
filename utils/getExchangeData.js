@@ -1,6 +1,6 @@
 function getExchangeData(input, ...args) {
   const [fares] = args;
-  
+  git 
   const fields = {
     A10EXI: { s: 3, l: 2 }, // pax number
     A10DOI: { s: 5, l: 7 }, // date of original issue
