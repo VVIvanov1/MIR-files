@@ -50,7 +50,7 @@ function ProcessMIRfile(text) {
     else if (type['MIR type'] === "RFND") {
         console.log('this is refund!!!');
         let refData = getRefundInfo(rawText)
-       
+        return refData
     }
     // if mir file is void tkt
     else if (type['MIR type'] === "VOID") {

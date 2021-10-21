@@ -14,7 +14,7 @@ function getItTaxData(string, step = 10) {
       ")" +
       curr.substring(0, 8).replace(/\s/g, "") +
       "-");
-  }, "");
+  }, "").slice(0,-1);
   let itTaxTotal = arr.reduce((prev, curr) => {
     return (prev = prev + Number(curr.substring(0, 8).replace(/\s/g, "")));
   }, 0);
