@@ -8,8 +8,8 @@ let fields = {
   T50BPC: { s: 81, l: 4 }, // booking agency account code
   T50TPC: { s: 85, l: 4 }, // issuing account code
   T50RCL: { s: 98, l: 6 }, // record locator
-  T50AGS: { s: 113, l: 6 }, // booking sign on
-  T50AGT: { s: 120, l: 4 }, // issuing agt sign-on
+  T50AGS: { s: 117, l: 2 }, // booking sign on
+  T50AGT: { s: 120, l: 2 }, // issuing agt sign-on
  // T50ISS: { s: 32, l: 29 }, // issuing and validating data
   T50IN7: { s: 248, l: 1 }, // ticket exchange section
   T50IN12: { s: 253, l: 1 }, //ticketing command used

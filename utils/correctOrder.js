@@ -20,7 +20,8 @@ function correctOrder(arr){
         ticketedAgent: null,
         bookedPCC: null,
         issuesPCC: null,
-        'itinerary type': null
+        'itinerary type': null,
+        processed:false
       }
 
       for(let i of arr){

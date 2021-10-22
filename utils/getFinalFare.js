@@ -2,6 +2,7 @@ function getFinalFares(fare, ...args) {
   let faresArr = fare.fares;
   let [paxes, flights, parsed, exchange] = args;
   let paxesData = [];
+  // for each passenger get ticket data
   paxes.passengers.map((pax) => {
     let filterId = pax.passenger.A02FIN;
     let exchangeRecord;

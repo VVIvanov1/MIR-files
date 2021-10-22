@@ -43,7 +43,7 @@ function ProcessMIRfile(text) {
             Object.assign(i, type, domInt);
         }
         let finalResult = correctOrder(tempResult);
-
+        
         return finalResult
     }
     // if mir file is refund tkt
