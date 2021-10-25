@@ -19,15 +19,17 @@ function getAirData(text) {
   };
 
   let arr = text.split("\r\n");
-  let flights = arr.filter((item) => {
-    if (item.startsWith("A04")) {
-      return item;
-    }
-  });
+  // let flights = arr.filter((item) => {
+  //   if (item.startsWith("A04")) {
+  //     return item;
+  //   }
+  // });
+  let flightsectionregex = /A04.*/gm;
+  let flightsArr = text.match(flightsectionregex)
 
   let flightsArrReady = [];
 
-  flights.forEach((element) => {
+  flightsArr.forEach((element) => {
     let fl = Object.entries(fields).map(([key, value]) => {
       return { [key]: element.substr(value.s, value.l) };
     });

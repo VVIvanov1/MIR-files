@@ -21,7 +21,7 @@ function ProcessMIRfile(text) {
   let exchA10section = /A10.*/g;
   let A10exist = exchA10section.exec(rawText);
   let rfndA23section = /A23.*/g;
-//   let A23exist = rfndA23section.exec(rawText);
+  //   let A23exist = rfndA23section.exec(rawText);
   A10exist !== null ? (type["MIR type"] = "EXCH") : type["MIR type"];
   // if mir file is normal tkt - ticket or exchange ticket, than provess this
   if (type["MIR type"] === "EXCH" || type["MIR type"] === "TKT") {
@@ -48,7 +48,12 @@ function ProcessMIRfile(text) {
   // if mir file is refund tkt
   else if (type["MIR type"] === "RFND") {
     console.log("this is refund!!!");
+    let fares = getFareValue(rawText, parsed.T50PGN);
     let refData = getRefundInfo(rawText);
+    let domInt = getDomInt(parsed);
+    let paxes = getPaxSection(rawText, parsed.T50ISA); 
+    let airData = getAirDataSection(rawText);
+    console.log(refData);
     return refData;
   }
   // if mir file is void tkt
