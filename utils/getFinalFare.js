@@ -7,7 +7,7 @@ function getFinalFares(fare, ...args) {
     let filterId = pax.passenger.A02FIN;
     let exchangeRecord;
     if (exchange !== null) {
-      exchangeRecord = exchange.filter(item => {
+      exchangeRecord = exchange.filter((item) => {
         if (item[0]["A10EXI"] === filterId) {
           return { record: item.record, adc: item.tktTotal };
         }
@@ -53,6 +53,8 @@ function getFinalFares(fare, ...args) {
         taxes:
           filtered[0].fare.fareData.A07TTA - filtered[0].fare.fareData.A07EQV,
         flights: flights.record,
+        departure: flights.departure,
+        arrival: flights.arrival,
         issueDate: parsed.T50DTE,
         issueTime: parsed.T50TME,
         bookedAgent: parsed.T50AGS,
