@@ -41,9 +41,9 @@ function getRefundInfo(text) {
 
   let tktRefTotal = baseFare + reduced + ittxObj.itTaxTotal
   let tktRefTaxTotal = reduced + ittxObj.itTaxTotal
-  console.log(tktRefTotal);
-  console.log(tktRefTaxTotal);
-  console.log(baseFare);
+  // console.log(tktRefTotal);
+  // console.log(tktRefTaxTotal);
+  // console.log(baseFare);
 
 
 

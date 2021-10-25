@@ -1,4 +1,5 @@
 function correctOrder(arr) {
+  let arrRes = [];
   let dataOrder = {
     issueDate: null,
     issueTime: null,
@@ -23,11 +24,14 @@ function correctOrder(arr) {
     "itinerary type": null,
     processed: false,
   };
-
-  for (let i of arr) {
-    Object.assign(dataOrder, i);
+  for (let y of arr) {
+    arrRes.push(Object.assign(dataOrder, y));
   }
-  return dataOrder;
-}
 
+  // for (let i of arr) {
+  //   Object.assign(dataOrder, i);
+  // }
+  return arrRes;
+}
+console.log("complete");
 module.exports = correctOrder;

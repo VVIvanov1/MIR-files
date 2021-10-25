@@ -34,8 +34,12 @@ function getAirData(text) {
     flightsArrReady.push(fl);
   });
   let ar = [];
-
-  let flightDates = getDepArrData(flightsArrReady);
+  let flightDates;
+  try {
+    flightDates = getDepArrData(flightsArrReady);
+  } catch (error) {
+    console.log(error);
+  }
 
   flightsArrReady.forEach((element) => {
     let filter = ["A04OCC", "A04OCN", "A04DCC", "A04DCN"];
@@ -62,7 +66,7 @@ function getAirData(text) {
   return {
     flights: flightsArrReady,
     record: flString,
-    departure: flightDates[0].dep,
+    departure: flightDates[0].departure,
     arrival: flightDates[flightDates.length - 1].arrival,
   };
 }
@@ -100,15 +104,7 @@ function getFlightString(arr) {
 
 // departure date & arrival date each ticket
 function getDepArrData(arr) {
-  //   } A04IND
-  //      1 = PREVIOUS DAY ARRIVAL
-
-  //      2 = SAME DAY ARRIVAL
-
-  //      3 = NEXT DAY ARRIVAL
-
-  //      4 = 2 DAYS LATER ARRIVAL
-
+ 
   let flightsObjArray = [];
   for (let i of arr) {
     let obj = {};
@@ -116,32 +112,36 @@ function getDepArrData(arr) {
     for (let y of i) {
       Object.assign(obj, y);
     }
-    let depDate = obj.A04DTE;
-    let year = new Date().getFullYear();
-    let month = new Date(depDate).getMonth().toString();
-    let day = new Date(depDate).getDate();
-    let fullDepartureDate = new Date(year, month, day).toLocaleDateString();
-    let ind = obj.A04IND;
-    let fullArrivalDate;
-    switch (ind) {
-      case "1":
-        fullArrivalDate = new Date(year, month, day - 1).toLocaleDateString();
-        break;
-      case "2":
-        fullArrivalDate = new Date(year, month, day).toLocaleDateString();
-        break;
-      case "3":
-        fullArrivalDate = new Date(year, month, day + 1).toLocaleDateString();
-        break;
-      case "4":
-        fullArrivalDate = new Date(year, month, day + 2).toLocaleDateString();
-        break;
+    if (obj.A04DTE !== null) {
+      let depDate = obj.A04DTE;
+      let year = new Date().getFullYear();
+      let month = new Date(depDate).getMonth().toString();
+      let day = new Date(depDate).getDate();
+      let fullDepartureDate = new Date(year, month, day).toLocaleDateString();
+      let ind = obj.A04IND;
+      let fullArrivalDate;
+      switch (ind) {
+        case "1":
+          fullArrivalDate = new Date(year, month, day - 1).toLocaleDateString();
+          break;
+        case "2":
+          fullArrivalDate = new Date(year, month, day).toLocaleDateString();
+          break;
+        case "3":
+          fullArrivalDate = new Date(year, month, day + 1).toLocaleDateString();
+          break;
+        case "4":
+          fullArrivalDate = new Date(year, month, day + 2).toLocaleDateString();
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
+      flightsObjArray.push({
+        departure: fullDepartureDate,
+        arrival: fullArrivalDate,
+      });
     }
-
-    flightsObjArray.push({ dep: fullDepartureDate, arrival: fullArrivalDate });
   }
   //   console.log(flightsObjArray);
   return flightsObjArray;
