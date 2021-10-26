@@ -7,7 +7,7 @@ function watcher(folder, sons) {
   const whatcher = hound.watch(folder);
 
   whatcher.on("create", (file) => {
-    console.log(file);
+    // console.log(file);
     let mirOwner = checkOwner(file, sons);
     if (mirOwner) {
       console.log("we take this MIR as its ours");

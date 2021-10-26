@@ -28,10 +28,7 @@ function correctOrder(arr) {
     arrRes.push(Object.assign(dataOrder, y));
   }
 
-  // for (let i of arr) {
-  //   Object.assign(dataOrder, i);
-  // }
   return arrRes;
 }
-console.log("complete");
+
 module.exports = correctOrder;
