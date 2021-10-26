@@ -45,7 +45,7 @@ async function saveRefundRecord(refund) {
   };
   // indexes = 5(tkt) 9(fare) 10(taxes) 11 (total)
   const res = await googleSheets.spreadsheets.values.get(request);
-//   console.log(res);
+  //   console.log(res);
 }
 
 module.exports = { writeToSheets, saveRefundRecord };
