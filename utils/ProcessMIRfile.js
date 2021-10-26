@@ -12,6 +12,7 @@ let [convertDate, convertTime] = dateTimeFormats;
 const fs = require("fs");
 let correctOrder = require("./correctOrder");
 const getRefundInfo = require("./getRefundData");
+const { writeToSheets, saveRefundRecord } = require("../gglesheets/processSheets");
 
 function ProcessMIRfile(text) {
   let rawText = fs.readFileSync(text, "utf8");
@@ -40,21 +41,37 @@ function ProcessMIRfile(text) {
       Object.assign(i, type, domInt);
     }
     let finalResult = correctOrder(tempResult);
-    return finalResult;
+    for (let i of finalResult) {
+      let dta = Object.entries(i).map(([key, val]) => {
+        return val;
+      });
+      try {
+        
+        writeToSheets(dta);
+        // saveRefundRecord(dta);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // return finalResult;
   }
   // if mir file is refund tkt
   else if (type["MIR type"] === "RFND") {
     console.log("this is refund!!!");
     let refData = getRefundInfo(rawText, parsed, domInt, type);
     // console.log(refData);
-    return refData;
+    // return refData;
   }
   // if mir file is void tkt
   else if (type["MIR type"] === "VOID") {
     console.log("this is void!!!");
-    let paxData = getPaxSection(rawText, parsed.T50ISA)
-    console.log(paxData.passengers);
-    return paxData
+    let paxData = getPaxSection(rawText, parsed.T50ISA);
+
+    for (let tkt of paxData.passengers) {
+      let tktVoid = tkt.passenger.A02TKT;
+    }
+    // return paxData;
   }
 }
 

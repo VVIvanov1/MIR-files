@@ -11,8 +11,8 @@ function watcher(folder, sons) {
     let mirOwner = checkOwner(file, sons);
     if (mirOwner) {
       console.log("we take this MIR as its ours");
-      let result = ProcessMir(file);
-      console.log(result);
+      ProcessMir(file);
+      // console.log(result);
     } else {
       console.log("we skip this MIR as it is not ours");
     }
