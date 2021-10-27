@@ -25,7 +25,7 @@ async function writeToSheets(data) {
         values: [data],
       },
     });
-    console.log(res);
+    // console.log(res);
     
   } catch (error) {
     console.error;

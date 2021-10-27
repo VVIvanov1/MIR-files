@@ -14,9 +14,9 @@ function getRefundInfo(text, ...args) {
 
   let paxName = regexResult[0].substring(48, 81).replace(/\s/g, "");
   let paxTicket =
-    regexResult[0].substring(3, 17).slice(0, 3) +
+    regexResult[0].substring(3, 16).slice(0, 3) +
     "-" +
-    regexResult[0].substring(3, 17).slice(3);
+    regexResult[0].substring(3, 16).slice(3);
 
   let refTaxesObj = {
     tx1: /(?<=T1:).{8}/gm,

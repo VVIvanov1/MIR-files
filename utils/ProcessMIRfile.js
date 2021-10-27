@@ -25,7 +25,7 @@ function ProcessMIRfile(text) {
   let exchA10section = /A10.*/g;
   let A10exist = exchA10section.exec(rawText);
   let domInt = getDomInt(parsed);
-  let newName = `${parsed.T50RCL}-${parsed.T50AGT}-${path.basename(text)}`
+  let newName = `${type["MIR type"]}-${parsed.T50RCL}-${parsed.T50AGT}-${path.basename(text)}`
 
   A10exist !== null ? (type["MIR type"] = "EXCH") : type["MIR type"];
   // if mir file is normal tkt - ticket or exchange ticket, than provess this
@@ -52,7 +52,7 @@ function ProcessMIRfile(text) {
       try {
 
         writeToSheets(dta);
-        // saveToDrive(folderId, text, newName);
+        saveToDrive(folderId, text, newName);
         // saveRefundRecord(dta);
       } catch (error) {
         console.log(error);
@@ -63,14 +63,17 @@ function ProcessMIRfile(text) {
   }
   // if mir file is refund tkt
   else if (type["MIR type"] === "RFND") {
-    console.log("this is refund!!!");
+    // console.log("this is refund!!!");
     let refData = getRefundInfo(rawText, parsed, domInt, type);
+    writeToSheets(refData);
+    saveToDrive(folderId, text, newName);
+
     // console.log(refData);
     // return refData;
   }
   // if mir file is void tkt
   else if (type["MIR type"] === "VOID") {
-    console.log("this is void!!!");
+    // console.log("this is void!!!");
     let paxData = getPaxSection(rawText, parsed.T50ISA);
 
     for (let tkt of paxData.passengers) {
