@@ -37,39 +37,18 @@ async function voidTicket(tkt) {
     range: ["Galileo!A2:V"],
   };
   const res = await googleSheets.spreadsheets.values.get(request);
-  let range = getVoidtktRange(res.data.values, tkt);
-  const resource = {
+  let row = getVoidtktRange(res.data.values, tkt);
+  let range = `Galileo!E${row}`;
+ 
+  let upd = await googleSheets.spreadsheets.values.update({
     auth: auth,
     spreadsheetId: spreadsheetId,
     range: range,
     valueInputOption: "USER_ENTERED",
-    resource: {
-      values: [[
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-        "void",
-      ]],
-    },
-  };
-  let upd = await googleSheets.spreadsheets.values.update(resource);
+    resource:{
+        values: [["VOID"]]
+    }
+  });
   console.log(upd);
 }
 
@@ -79,10 +58,9 @@ function getVoidtktRange(arr, tkt) {
     return item[5] === tkt ? item : null;
   });
   let initIndex = reverced.length - reverced.indexOf(found) + 1;
-  return `Galileo!A${initIndex}:V${initIndex}`;
+  
+  return initIndex;
 }
 
 voidTicket(tktToFind);
-// let addres = getVoidtktRange(initialArr, tktToFind);
 
-// console.log(addres);
