@@ -12,9 +12,9 @@ async function writeToSheets(data) {
       keyFile: path.join(__dirname, "lustrous-baton-327814-78c876fb8436.json"),
       scopes: "https://www.googleapis.com/auth/spreadsheets",
     });
-    //   console.log(auth);
+    
     const client = await auth.getClient();
-    //   console.log(client);
+    
     const googleSheets = google.sheets({ version: "v4", auth: client });
     const res = await googleSheets.spreadsheets.values.append({
       auth: auth,
