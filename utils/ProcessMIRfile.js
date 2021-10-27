@@ -10,9 +10,12 @@ const getFinalFare = require("./getFinalFare");
 const dateTimeFormats = require("../helpers/dateTimeConverter");
 let [convertDate, convertTime] = dateTimeFormats;
 const fs = require("fs");
+const path = require("path")
 let correctOrder = require("./correctOrder");
 const getRefundInfo = require("./getRefundData");
 const { writeToSheets, saveRefundRecord } = require("../gglesheets/processSheets");
+const { saveToDrive } = require("../ggledrive/saveToDrive")
+const folderId = "18tAuB_F8BEV6aRYsEzhAJf21vD7H_xMP"
 
 function ProcessMIRfile(text) {
   let rawText = fs.readFileSync(text, "utf8");
@@ -22,6 +25,7 @@ function ProcessMIRfile(text) {
   let exchA10section = /A10.*/g;
   let A10exist = exchA10section.exec(rawText);
   let domInt = getDomInt(parsed);
+  let newName = `${parsed.T50RCL}-${parsed.T50AGT}-${path.basename(text)}`
 
   A10exist !== null ? (type["MIR type"] = "EXCH") : type["MIR type"];
   // if mir file is normal tkt - ticket or exchange ticket, than provess this
@@ -46,8 +50,9 @@ function ProcessMIRfile(text) {
         return val;
       });
       try {
-        
+
         writeToSheets(dta);
+        // saveToDrive(folderId, text, newName);
         // saveRefundRecord(dta);
       } catch (error) {
         console.log(error);

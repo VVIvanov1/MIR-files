@@ -1,15 +1,15 @@
 const { google } = require("googleapis");
 const path = require("path");
 const fs = require("fs");
-const { authenticate } = require("@google-cloud/local-auth");
-const sheets = google.sheets("v4");
+// const { authenticate } = require("@google-cloud/local-auth");
+// const sheets = google.sheets("v4");
 
 const spreadsheetId = "1hs47pgyM4-DigvGmLAstmH0phOcyy9o3HbvDswe17Eg";
 
 async function writeToSheets(data) {
   try {
     const auth = new google.auth.GoogleAuth({
-      keyFile: path.join(__dirname, "lustrous-baton-327814-78c876fb8436.json"),
+      keyFile: path.join(__dirname, "lustrous-baton-327814-541cb79856f1.json"),
       scopes: "https://www.googleapis.com/auth/spreadsheets",
     });
     
@@ -25,6 +25,7 @@ async function writeToSheets(data) {
         values: [data],
       },
     });
+    console.log(res);
     
   } catch (error) {
     console.error;
