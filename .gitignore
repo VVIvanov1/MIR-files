@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Credentials
+resender-gdrive-access-40037-0040b5f7fab3.json
+credentials.json
+lustrous-baton-327814-541cb79856f1.json

@@ -13,7 +13,7 @@ const fs = require("fs");
 const path = require("path")
 let correctOrder = require("./correctOrder");
 const getRefundInfo = require("./getRefundData");
-const { writeToSheets, saveRefundRecord } = require("../gglesheets/processSheets");
+const { writeToSheets, voidTicket } = require("../gglesheets/processSheets");
 const { saveToDrive } = require("../ggledrive/saveToDrive")
 const folderId = "18tAuB_F8BEV6aRYsEzhAJf21vD7H_xMP"
 
@@ -63,23 +63,23 @@ function ProcessMIRfile(text) {
   }
   // if mir file is refund tkt
   else if (type["MIR type"] === "RFND") {
-    // console.log("this is refund!!!");
+   
     let refData = getRefundInfo(rawText, parsed, domInt, type);
     writeToSheets(refData);
     saveToDrive(folderId, text, newName);
 
-    // console.log(refData);
-    // return refData;
   }
   // if mir file is void tkt
   else if (type["MIR type"] === "VOID") {
-    // console.log("this is void!!!");
+    
     let paxData = getPaxSection(rawText, parsed.T50ISA);
 
     for (let tkt of paxData.passengers) {
       let tktVoid = tkt.passenger.A02TKT;
+      voidTicket(tktVoid);
+      saveToDrive(folderId, text, newName);
     }
-    // return paxData;
+    
   }
 }
 

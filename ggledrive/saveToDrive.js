@@ -40,10 +40,7 @@ async function saveToDrive(folderId,file, name) {
     function (err, file) {
       if (err) {
         console.error(err);
-      } else {
-        // successlog.info(`Success Message and variables: ${new Date().toDateString()}`);
-        // loger.log("info", `File with Id ${file.data.id} was created`);
-      }
+      } 
     }
   );
 }
