@@ -9,7 +9,7 @@ const spreadsheetId = "1hs47pgyM4-DigvGmLAstmH0phOcyy9o3HbvDswe17Eg";
 async function writeToSheets(data) {
   try {
     const auth = new google.auth.GoogleAuth({
-      keyFile: path.join(__dirname, "lustrous-baton-327814-541cb79856f1.json"),
+      keyFile: path.join(__dirname, "gsheets-serviceacc-30569f096671.json"),
       scopes: "https://www.googleapis.com/auth/spreadsheets",
     });
     
@@ -34,7 +34,7 @@ async function writeToSheets(data) {
 
 async function voidTicket(tkt) {
   const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(__dirname, "lustrous-baton-327814-541cb79856f1.json"),
+    keyFile: path.join(__dirname, "gsheets-serviceacc-30569f096671.json"),
     scopes: "https://www.googleapis.com/auth/spreadsheets",
   });
   const client = await auth.getClient();

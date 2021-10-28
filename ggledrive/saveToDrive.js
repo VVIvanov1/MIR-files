@@ -10,7 +10,7 @@ async function saveToDrive(folderId,file, name) {
   // const folderId = '134vBXfTB5FnQy6PUSj5Ir2Pqz8AxBWS5 @name = file name @file = path to file @ folderId = google drive'
   // 134vBXfTB5FnQy6PUSj5Ir2Pqz8AxBWS5
   const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(__dirname, "resender-gdrive-access-40037-0040b5f7fab3.json"),
+    keyFile: path.join(__dirname, "resender-gdrive-access-40037-33edc93973b3.json"),
     scopes: "https://www.googleapis.com/auth/drive",
   });
   const client = await auth.getClient();
